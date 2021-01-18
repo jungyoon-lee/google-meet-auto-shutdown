@@ -17,7 +17,11 @@ function check() {
                 $('.HKarue').click();
             }
             
-            send_message("message");  
+            send_message(result.message);
+
+            setTimeout(function(){
+                window.location.reload();
+            }, 1000)
         }   
     });
 }
