@@ -1,0 +1,19 @@
+{
+    "name": "Google Meet Auto Shutdown",
+    "description": "If the number of participants decreases by a setting number, comment 'thank you' and shutdown the meet connection",
+    "version": "1.0",
+    "icons": { 
+        "128": "img/icon.png" 
+    },
+    "content_scripts": [{
+        "js": ["script/jquery.js", "script/content_script.js"],
+        "matches": ["*://meet.google.com/*"]
+    }],
+    "browser_action": {
+        "default_popup": "popup.html"
+    },
+    "permissions": [
+        "storage"
+    ],
+    "manifest_version": 2
+} 

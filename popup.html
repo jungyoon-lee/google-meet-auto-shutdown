@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <style>
+            body {
+                width: 270px;
+                height: 370px;
+            }
+            #onoff_btn {
+                width: 270px;
+                height: 70px;
+                font-size: 40px;
+                color: black;
+                background-color: white;
+            }
+
+            .save {
+                margin-top: 20px;
+                font-size: 20px;
+            }
+            input {
+                height: 30px;
+            }
+            #limit_num {
+                width: 50px;
+            }
+            #message {
+                width: 150px;
+            }
+            #save_btn {
+                width: 270px;
+                height: 36px;
+            }
+
+            .content {
+                margin-top: 25px;
+            }
+            p {
+                font-size: 17px;
+                margin-top: 0px;
+                margin-bottom: 0px;
+            }
+        </style>
+        <script src="script/jquery.js"></script>
+        <script src="script/popup.js"></script>
+    </head>
+
+    <body>
+        <button id="onoff_btn">ON / OFF</button>
+
+        <div class="save">
+            <a>limit_num = </a>
+            <input type="text" name="limit_num" id="limit_num" placeholder="ex) 60"><br>
+            <a>message = </a>
+            <input type="text" name="message" id="message" placeholder="ex) 감사합니다.">
+            <button id="save_btn">SAVE</button>
+        </div>
+
+        <div class="content">
+            <p id="participants_num">participants_num = 100</p><br>
+            <p>if (limit_num > participants_num) {</p>
+            <p>&nbsp&nbsp&nbsp&nbsp meet.write(message);</p>
+            <p>&nbsp&nbsp&nbsp&nbsp meet.shutdown();</p>
+            <p>}</p>
+        </div>
+    </body>
+</html>
