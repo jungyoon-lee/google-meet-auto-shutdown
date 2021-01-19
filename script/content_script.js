@@ -17,6 +17,7 @@ function check() {
                 $('.HKarue').click();
             }
             
+            chrome.storage.sync.set({'power': false});
             send_message(result.message);
 
             setTimeout(function(){
