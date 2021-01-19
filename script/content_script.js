@@ -6,24 +6,32 @@ function check() {
     }
     
     chrome.storage.sync.get(['power', 'limit_num', 'message'], function(result) {
-        if (!result.power) {
+        if (!result.power) { // popup.html's ON/OFF Button
             return;
         }
         
-        var participants_num = document.querySelector('.wnPUne').innerHTML;
-        if (Number(result.limit_num) >= Number(participants_num)) {
+        var participants_num = document.querySelector('.wnPUne').innerHTML; // jquery don't work
+        if (Number(result.limit_num) < Number(participants_num)) {
+            return;
+        }
 
-            if ($('.VfPpkd-kBDsod').length == 0) {
-                $('.HKarue').click();
+        chrome.storage.sync.set({'power': false});
+
+        if (result.message != '') {
+            if ($('.VfPpkd-kBDsod').length == 0) { // Toggle Message Leave Button 
+            $('.HKarue').click(); // Toggle Message Open Button
             }
-            
-            chrome.storage.sync.set({'power': false});
-            send_message(result.message);
+        }
+        send_message(result.message);
 
-            setTimeout(function(){
-                window.location.reload();
-            }, 1000)
-        }   
+        var messages = backup_messages();
+        
+        setTimeout(function() {
+            window.location.reload();
+        }, 2000)
+
+        var filename = getNowDate();
+        download(messages, filename);
     });
 }
 
@@ -42,7 +50,7 @@ function send_message(message) {
     }
 
     var textarea = document.querySelector('.KHxj8b');
-    textarea.value = message;
+    textarea.value = message;   
 
     var send_btn = document.querySelector('.Cs0vCd');
     send_btn.classList.remove('RDPZE');
@@ -51,25 +59,34 @@ function send_message(message) {
      
 }
 
+function backup_messages() {
+    // var _messages = document.querySelectorAll('.oIy2qc'); // just message
+    var _messages = document.querySelectorAll('.GDhqjd'); // {username}{date}{message}
+    var messages = [];
 
-// function check() {
-//     var comments = $("div[jsname^='dTKtvb']");
+    for (var i = 0; i < _messages.length; i++) {
+        messages.push(_messages[i].textContent);
+        messages.push("\n");
+    }
+
+    return messages;
+
     
-//     chrome.storage.sync.get(['is', 'keyword', 'count'], function(result) {        
-//         if (result.is == true) {
-//             var num = 0;
-//             for (var i = 0; i < comments.length; i++) {
-//                 if (comments[i].textContent.indexOf(result.keyword) == 0) {
-//                     num += 1;
-//                 } 
-//             }
-    
-//             console.log(num);
-            
-//             if (num >= result.count) {
-//                 window.location.reload();
-//                 // alert(result.keyword + ' * ' + num);
-//             }
-//         }
-//     });
-// }
+}
+
+function download(texts, filename) {
+    var a = document.createElement('a');
+    var file = new Blob(texts, {type: 'text/plain;charset=utf-8'});
+
+    a.href= URL.createObjectURL(file);
+    a.download = filename;
+    a.click();
+}
+
+function getNowDate() {
+    var today = new Date();
+    filename = today.getFullYear() + '-' + (today.getMonth()+1) + '-' + today.getDate() + 
+    '-' + today.getHours() + ":" + today.getMinutes();
+
+    return filename;
+}
