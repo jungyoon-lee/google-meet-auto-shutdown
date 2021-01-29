@@ -4,4 +4,4 @@
 
 
 ## Install && Usage
-[Chrome Web Store](https://chrome.google.com/webstore/detail/google-meet-auto-shutdown/jfmhaloplemekdafjadihogbdgocbdpe?hl=ko&authuser=0)
+[Chrome Web Store](https://chrome.google.com/webstore/detail/google-meet-auto-shutdown/jfmhaloplemekdafjadihogbdgocbdpe)
